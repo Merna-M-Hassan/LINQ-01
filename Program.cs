@@ -13,14 +13,26 @@
             //                  select new { p.ProductName,p.UnitPrice};
 
             //Method Syntax
-            var methodResult = Source.ProductList
-                .Where(p => p.Category == "Seafood")
-                .Select(p => new { p.ProductName,p.UnitPrice });
+            //var methodResult = Source.ProductList
+            //    .Where(p => p.Category == "Seafood")
+            //    .Select(p => new { p.ProductName,p.UnitPrice });
 
-            foreach (var method in methodResult)
+            //foreach (var method in methodResult)
+            //{
+            //    Console.WriteLine($"productName: {method.ProductName}, productPrice: {method.UnitPrice}");
+            //}
+            #endregion
+
+            #region Q2)
+            //Get a list of only the product names from ProductList. Print each name.
+
+            var nameResult = Source.ProductList
+                .Select(p => new { p.ProductName});
+
+            foreach (var name in nameResult)
             {
-                Console.WriteLine($"productName: {method.ProductName}, productPrice: {method.UnitPrice}");
-            } 
+                Console.WriteLine($"productName: {name.ProductName}");
+            }
             #endregion
         }
     }
