@@ -38,13 +38,26 @@
             #region Q3)
             //Sort all products by UnitPrice (ascending). Print each product's name and price.
 
-            var productPrice = Source.ProductList
-                .OrderBy(p => p.UnitPrice)
+            //var productPrice = Source.ProductList
+            //    .OrderBy(p => p.UnitPrice)
+            //    .Select(p => new { p.ProductName, p.UnitPrice });
+
+            //    foreach(var price in productPrice)
+            //{
+            //    Console.WriteLine($"productName: {price.ProductName}, productPrice: {price.UnitPrice}");
+            //}
+            #endregion
+
+            #region Q4)
+            //Get all products where UnitPrice is between 10 and 30
+
+            var productResult = Source.ProductList
+                .Where(p => p.UnitPrice >=10 && p.UnitPrice <= 30 )
                 .Select(p => new { p.ProductName, p.UnitPrice });
 
-                foreach(var price in productPrice)
+            foreach (var name in productResult)
             {
-                Console.WriteLine($"productName: {price.ProductName}, productPrice: {price.UnitPrice}");
+                Console.WriteLine($"productName: {name.ProductName}, productPrice: {name.UnitPrice}");
             }
             #endregion
         }
