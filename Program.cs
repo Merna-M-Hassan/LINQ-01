@@ -51,13 +51,26 @@
             #region Q4)
             //Get all products where UnitPrice is between 10 and 30
 
-            var productResult = Source.ProductList
-                .Where(p => p.UnitPrice >=10 && p.UnitPrice <= 30 )
-                .Select(p => new { p.ProductName, p.UnitPrice });
+            //var productResult = Source.ProductList
+            //    .Where(p => p.UnitPrice >=10 && p.UnitPrice <= 30 )
+            //    .Select(p => new { p.ProductName, p.UnitPrice });
 
-            foreach (var name in productResult)
+            //foreach (var name in productResult)
+            //{
+            //    Console.WriteLine($"productName: {name.ProductName}, productPrice: {name.UnitPrice}");
+            //}
+            #endregion
+
+            #region Q5)
+            //Get all products that are in stock (UnitsInStock > 0) and belong to the "Condiments" category.
+
+            var productStock = Source.ProductList
+                .Where(p => p.Category == "Spices & Condiments" && p.UnitsInStock > 0)
+                .Select(p => new { p.ProductName, p.UnitsInStock, p.Category });
+
+            foreach (var product in productStock) 
             {
-                Console.WriteLine($"productName: {name.ProductName}, productPrice: {name.UnitPrice}");
+                Console.WriteLine($"ProductName: {product.ProductName}, productStock: {product.UnitsInStock}, productCategory: {product.Category}");
             }
             #endregion
         }
