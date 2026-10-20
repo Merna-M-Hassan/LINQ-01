@@ -64,13 +64,46 @@
             #region Q5)
             //Get all products that are in stock (UnitsInStock > 0) and belong to the "Condiments" category.
 
-            var productStock = Source.ProductList
-                .Where(p => p.Category == "Spices & Condiments" && p.UnitsInStock > 0)
-                .Select(p => new { p.ProductName, p.UnitsInStock, p.Category });
+            //var productStock = Source.ProductList
+            //    .Where(p => p.Category == "Spices & Condiments" && p.UnitsInStock > 0)
+            //    .Select(p => new { p.ProductName, p.UnitsInStock, p.Category });
 
-            foreach (var product in productStock) 
+            //foreach (var product in productStock) 
+            //{
+            //    Console.WriteLine($"ProductName: {product.ProductName}, productStock: {product.UnitsInStock}, productCategory: {product.Category}");
+            //}
+            #endregion
+
+            #region Q6)
+            //Create a new anonymous type with three properties
+
+            //Query Syntax
+            //var products = from p in Source.ProductList
+            //               select new
+            //               {
+            //                   Name = p.ProductName,
+            //                   Price = p.UnitPrice,
+            //                   StockStatus = p.UnitsInStock > 0 ? "Available" : "Out of Stock"
+            //               };
+
+            //foreach (var p in products)
+            //{
+            //    Console.WriteLine($"productName: {p.Name}, productPrice: {p.Price}, productStatus: {p.StockStatus}");
+            //}
+
+
+            //Method Syntax
+            var products = Source.ProductList
+                .Select(p => new
+                {
+                    Name = p.ProductName,
+                    Price = p.UnitPrice,
+                    StockStatus = p.UnitsInStock > 0 ? "Available" : "Out of Stock"
+                });
+
+            foreach (var p in products)
             {
-                Console.WriteLine($"ProductName: {product.ProductName}, productStock: {product.UnitsInStock}, productCategory: {product.Category}");
+                Console.WriteLine($"productName: {p.Name}, productPrice: {p.Price}, productStatus: {p.StockStatus}");
             }
             #endregion
         }
