@@ -1,6 +1,7 @@
 ﻿namespace Assignment_22_LINQ;
 
 using System.Drawing;
+using System.Numerics;
 using static Assignment_22_LINQ.Source;
 
 internal class Program
@@ -139,14 +140,29 @@ internal class Program
         #region Q9)
         //Get all products from the "Beverages" category, sorted by UnitsInStock descending. Print name and stock.
 
-        var products = Source.ProductList
-               .Where(p => p.Category == "Beverages")
-               .OrderByDescending(p => p.UnitsInStock)
-               .Select(p => new { p.ProductName, p.UnitsInStock });
+        //var products = Source.ProductList
+        //       .Where(p => p.Category == "Beverages")
+        //       .OrderByDescending(p => p.UnitsInStock)
+        //       .Select(p => new { p.ProductName, p.UnitsInStock });
 
-        foreach (var p in products)
+        //foreach (var p in products)
+        //{
+        //    Console.WriteLine($"ProductName: {p.ProductName}, ProductStock: {p.UnitsInStock}");
+        //}
+        #endregion
+
+        #region Q10)
+        //Using QUERY SYNTAX with a compound from clause, list all orders placed in 1997 or later showing CustomerID and OrderDate.
+
+        var orders1997Plus =
+    from c in Source.CustomerList
+    from o in c.Orders
+    where o.OrderDate.Year >= 1997
+    select new { c.CustomerID, o.OrderDate };
+
+        foreach (var o in orders1997Plus)
         {
-            Console.WriteLine($"ProductName: {p.ProductName}, ProductStock: {p.UnitsInStock}");
+            Console.WriteLine($"CustomerID: {o.CustomerID}, OrderDate: {o.OrderDate:yyyy-MM-dd}");
         }
         #endregion
     }
