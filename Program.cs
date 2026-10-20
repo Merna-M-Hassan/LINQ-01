@@ -154,15 +154,27 @@ internal class Program
         #region Q10)
         //Using QUERY SYNTAX with a compound from clause, list all orders placed in 1997 or later showing CustomerID and OrderDate.
 
-        var orders1997Plus =
-    from c in Source.CustomerList
-    from o in c.Orders
-    where o.OrderDate.Year >= 1997
-    select new { c.CustomerID, o.OrderDate };
+        //    var orders1997Plus =
+        //from c in Source.CustomerList
+        //from o in c.Orders
+        //where o.OrderDate.Year >= 1997
+        //select new { c.CustomerID, o.OrderDate };
 
-        foreach (var o in orders1997Plus)
+        //    foreach (var o in orders1997Plus)
+        //    {
+        //        Console.WriteLine($"CustomerID: {o.CustomerID}, OrderDate: {o.OrderDate:yyyy-MM-dd}");
+        //    }
+        #endregion
+
+        #region Q11)
+        //Show position number alongside ProductName
+
+        var numbered = Source.ProductList
+              .Select((p, i) => new { Position = i + 1, p.ProductName });
+
+        foreach (var p in numbered)
         {
-            Console.WriteLine($"CustomerID: {o.CustomerID}, OrderDate: {o.OrderDate:yyyy-MM-dd}");
+            Console.WriteLine($"{p.Position}. {p.ProductName}");
         }
         #endregion
     }
