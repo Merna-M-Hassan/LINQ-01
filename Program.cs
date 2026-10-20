@@ -1,5 +1,6 @@
 ﻿namespace Assignment_22_LINQ;
 
+using System.Drawing;
 using static Assignment_22_LINQ.Source;
 
 internal class Program
@@ -124,14 +125,28 @@ internal class Program
         #region Q8)
         //Sort ProductList by Category ascending, then within each category, sort by UnitPrice descending.
 
-        var sortProduct = Source.ProductList
-                .OrderBy(p => p.Category)
-                .ThenByDescending(p => p.UnitPrice)
-                .Select(p => new { p.Category, p.ProductName, p.UnitPrice });
+        //var sortProduct = Source.ProductList
+        //        .OrderBy(p => p.Category)
+        //        .ThenByDescending(p => p.UnitPrice)
+        //        .Select(p => new { p.Category, p.ProductName, p.UnitPrice });
 
-        foreach (var p in sortProduct)
+        //foreach (var p in sortProduct)
+        //{
+        //    Console.WriteLine($"ProductCategory: {p.Category}, ProductName:  {p.ProductName}, ProductPrice: {p.UnitPrice}");
+        //}
+        #endregion
+
+        #region Q9)
+        //Get all products from the "Beverages" category, sorted by UnitsInStock descending. Print name and stock.
+
+        var products = Source.ProductList
+               .Where(p => p.Category == "Beverages")
+               .OrderByDescending(p => p.UnitsInStock)
+               .Select(p => new { p.ProductName, p.UnitsInStock });
+
+        foreach (var p in products)
         {
-            Console.WriteLine($"ProductCategory: {p.Category}, ProductName:  {p.ProductName}, ProductPrice: {p.UnitPrice}");
+            Console.WriteLine($"ProductName: {p.ProductName}, ProductStock: {p.UnitsInStock}");
         }
         #endregion
     }
