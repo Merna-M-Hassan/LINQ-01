@@ -112,12 +112,26 @@ internal class Program
         #region Q7)
         //Print each product's name along with its position (1-based) in the list. Expected format: 1.Chai, 2.Chang, etc.
 
-        var numberProduct = ProductList
-                 .Select((p, i) => $"{i + 1}. {p.ProductName}");
+        //var numberProduct = ProductList
+        //         .Select((p, i) => $"{i + 1}. {p.ProductName}");
 
-        foreach (var line in numberProduct)
+        //foreach (var line in numberProduct)
+        //{
+        //    Console.WriteLine(line);
+        //}
+        #endregion
+
+        #region Q8)
+        //Sort ProductList by Category ascending, then within each category, sort by UnitPrice descending.
+
+        var sortProduct = Source.ProductList
+                .OrderBy(p => p.Category)
+                .ThenByDescending(p => p.UnitPrice)
+                .Select(p => new { p.Category, p.ProductName, p.UnitPrice });
+
+        foreach (var p in sortProduct)
         {
-            Console.WriteLine(line);
+            Console.WriteLine($"ProductCategory: {p.Category}, ProductName:  {p.ProductName}, ProductPrice: {p.UnitPrice}");
         }
         #endregion
     }
